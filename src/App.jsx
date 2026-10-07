@@ -1,113 +1,83 @@
 import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [ideia, setIdeia] = useState('')
+  const [ideias, setIdeias] = useState([])
+  const [concluidas, setConcluidas] = useState([])
+
+  function adicionarIdeia(e) {
+    e.preventDefault()
+
+    if (ideia.trim() === '') {
+      return
+    }
+
+    setIdeias([...ideias, ideia])
+    setIdeia('')
+  }
+
+  function concluirIdeia(index) {
+    const ideiaConcluida = ideias[index]
+
+    setConcluidas([...concluidas, ideiaConcluida])
+    setIdeias(ideias.filter((_, i) => i !== index))
+  }
+
+  function removerConcluida(index) {
+    setConcluidas(concluidas.filter((_, i) => i !== index))
+  }
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img
-            src={heroImg}
-            className="base"
-            width="170"
-            height="179"
-            alt=""
-          />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
+    <div className="app">
+      <h1>Painel de Ideias</h1>
 
-        <div>
-          <h1>Meu projeto React</h1>
-          <p>
-            Edite o arquivo <code>src/App.jsx</code> e salve para testar.
-          </p>
-        </div>
+      <form onSubmit={adicionarIdeia}>
+        <input
+          type="text"
+          placeholder="Digite uma ideia"
+          value={ideia}
+          onChange={(e) => setIdeia(e.target.value)}
+        />
 
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount(count + 1)}
-        >
-          Contador: {count}
-        </button>
-      </section>
+        <button type="submit">Adicionar</button>
+      </form>
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-
-          <h2>Documentação</h2>
-          <p>Veja mais informações sobre o projeto</p>
+      <div className="painel">
+        <section>
+          <h2>Ideias</h2>
 
           <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Vite
-              </a>
-            </li>
+            {ideias.map((item, index) => (
+              <li key={index}>
+                <span>{item}</span>
 
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                React
-              </a>
-            </li>
+                <button onClick={() => concluirIdeia(index)}>
+                  Concluir
+                </button>
+              </li>
+            ))}
           </ul>
-        </div>
+        </section>
 
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-
-          <h2>Comunidade</h2>
-          <p>Confira as redes do Vite</p>
+        <section>
+          <h2>Concluídas</h2>
 
           <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                GitHub
-              </a>
-            </li>
+            {concluidas.map((item, index) => (
+              <li key={index}>
+                <span>{item}</span>
 
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                Discord
-              </a>
-            </li>
-
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                X.com
-              </a>
-            </li>
-
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                Bluesky
-              </a>
-            </li>
+                <button onClick={() => removerConcluida(index)}>
+                  Remover
+                </button>
+              </li>
+            ))}
           </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="spacer"></section>
-    </>
+        </section>
+      </div>
+    </div>
   )
 }
 
 export default App
-

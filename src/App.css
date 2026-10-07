@@ -1,63 +1,70 @@
 
 body {
+  margin: 0;
   font-family: Arial, sans-serif;
-  background: #e8edf2;
-}
-
-#root {
-  min-height: 100vh;
+  background: #f2f4f7;
 }
 
 .app {
-  width: 590px;
+  width: 650px;
   margin: 50px auto;
   padding: 25px;
-  background: #fff;
-  border-radius: 8px;
+  background: white;
+  border-radius: 10px;
 }
 
 h1 {
   text-align: center;
+  margin-bottom: 25px;
 }
 
-form {
+.form {
   display: flex;
-  gap: 8px;
+  gap: 10px;
 }
 
-input[type="text"] {
+input {
   flex: 1;
   padding: 10px;
-  border: 1px solid #bbb;
-  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 button {
-  padding: 10px 16px;
-  border: 0;
-  border-radius: 6px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  background: #ddd;
 }
 
-ul {
-  padding: 0;
-  list-style: none;
-}
-
-li {
+.painel {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 8px 0;
-  padding: 10px;
-  background: #f5f5f5;
-  border-radius: 6px;
+  gap: 15px;
+  margin-top: 25px;
 }
 
-li span {
+.caixa {
   flex: 1;
+  padding: 15px;
+  background: #f2f2f2;
+  border-radius: 7px;
 }
 
-.erro {
-  color: #d00;
+.caixa h2 {
+  text-align: center;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin-top: 10px;
+  background: white;
+  border-radius: 5px;
+}
+
+.item span {
+  margin-right: 10px;
 }
